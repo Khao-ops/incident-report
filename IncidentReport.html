@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ใบแจ้งซ่อม — Incident Report TBR</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--dk:#0D3B4F;--pr:#0E6F5E;--ac:#1A9E76;--lt:#E8F5F0;--cd:#F0F9F5;--tx:#1E293B;--mu:#64748B;--bd:#CBD5E1;--or:#E67E22;--rd:#E74C3C}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans Thai','Segoe UI',sans-serif;background:linear-gradient(135deg,#E8F5F0,#F0F9F5 40%,#FAFBFC);min-height:100vh;color:var(--tx)}
+.hd{background:linear-gradient(135deg,var(--dk),var(--pr));padding:20px 0 0;color:#fff}
+.ct{max-width:860px;margin:0 auto;padding:0 16px}
+.hi{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hico{width:36px;height:36px;border-radius:8px;background:rgba(26,158,118,.3);display:flex;align-items:center;justify-content:center;font-size:18px}
+h1{margin:0;font-size:22px;font-weight:800}
+.hsub{font-size:12px;color:rgba(255,255,255,.6);margin-left:46px}
+.nb{padding:10px 24px;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;color:#fff;font-family:inherit;transition:.2s}
+.nb.on{background:var(--ac)}.nb:not(.on){background:rgba(255,255,255,.15)}
+.tabs{display:flex;gap:2px;margin-top:16px}
+.tb{padding:10px 18px;border:none;cursor:pointer;font-size:13px;border-radius:10px 10px 0 0;font-family:inherit;border-bottom:3px solid transparent;transition:.2s}
+.tb.on{background:#fff;color:var(--pr);font-weight:700;border-bottom-color:var(--ac)}.tb:not(.on){background:rgba(255,255,255,.4);color:var(--mu);font-weight:500}
+.pnl{background:#fff;border-radius:0 0 16px 16px;padding:24px 28px;box-shadow:0 4px 24px rgba(0,0,0,.06);margin-bottom:32px}
+.ib{display:flex;align-items:center;justify-content:space-between;background:var(--cd);border-radius:10px;padding:10px 16px;margin-bottom:20px;flex-wrap:wrap;gap:8px}
+.ino{font-size:14px;font-weight:700;color:var(--pr)}
+.bg{display:inline-block;padding:3px 12px;border-radius:20px;font-size:12px;font-weight:600}
+.bg-p{background:#FEF3C7;color:#92400E;border:1px solid #FCD34D}.bg-a{background:#D1FAE5;color:#065F46;border:1px solid #6EE7B7}
+.bg-c{background:#E0E7FF;color:#3730A3;border:1px solid #A5B4FC}.bg-x{background:#FEE2E2;color:#991B1B;border:1px solid #FCA5A5}
+.sc{margin-bottom:28px}.sh{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:8px}
+.sb{width:6px;height:24px;border-radius:3px}.st{font-size:17px;font-weight:700;color:var(--dk)}
+.fl{margin-bottom:16px}.fl label{display:block;font-size:13px;font-weight:600;color:var(--tx);margin-bottom:5px}
+.rq{color:var(--rd);margin-left:3px}.ht{font-size:11px;color:var(--mu);margin-bottom:5px}
+.ip,.ta,.sl{width:100%;padding:9px 12px;font-size:14px;border:1.5px solid var(--bd);border-radius:8px;background:#FAFBFC;outline:none;font-family:inherit;transition:.2s;color:var(--tx)}
+.ip:focus,.ta:focus,.sl:focus{border-color:var(--ac)}.ta{resize:vertical;min-height:60px}
+.sl{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%2364748B' stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 16px}
+.cp{padding:9px 12px;font-size:14px;border:1.5px solid var(--bd);border-radius:8px;background:var(--cd);font-weight:700;color:var(--pr);min-height:38px}
+.pa{display:flex;gap:10px;flex-wrap:wrap}
+.pt{position:relative;width:90px;height:90px;border-radius:8px;overflow:hidden;border:1.5px solid var(--bd)}
+.pt img{width:100%;height:100%;object-fit:cover}
+.pr{position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;border:none;background:rgba(231,76,60,.85);color:#fff;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.pad{width:90px;height:90px;border-radius:8px;border:2px dashed var(--bd);background:#F8FAFC;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--mu);font-size:11px}
+.pad span:first-child{font-size:24px;line-height:1}
+.ac{display:flex;justify-content:space-between;align-items:center;margin-top:24px;padding-top:20px;border-top:1px solid #E2E8F0;flex-wrap:wrap;gap:10px}
+.bt{padding:10px 28px;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;transition:.2s;font-family:inherit}
+.bt-bk{background:#F1F5F9;color:var(--mu)}.bt-nx{background:var(--pr);color:#fff}
+.bt-sv{background:linear-gradient(135deg,var(--pr),var(--ac));color:#fff;box-shadow:0 4px 12px rgba(26,158,118,.3)}
+.bt-sv:disabled{background:var(--mu);box-shadow:none;opacity:.7}
+.bt-pdf{background:#1565C0;color:#fff;box-shadow:0 4px 12px rgba(21,101,192,.3)}
+.al{padding:12px 16px;border-radius:10px;margin-bottom:16px;font-size:14px;font-weight:600}
+.al-s{background:#D1FAE5;color:#065F46;border:1px solid #6EE7B7}.al-e{background:#FEE2E2;color:#991B1B;border:1px solid #FCA5A5}
+.lp{background:#fff;border-radius:16px;padding:24px 28px;box-shadow:0 4px 24px rgba(0,0,0,.06);margin-top:20px;margin-bottom:32px}
+.li{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;border:1.5px solid #E2E8F0;cursor:pointer;background:#FAFBFC;margin-bottom:10px;transition:.2s}
+.li:hover{border-color:var(--ac);background:var(--cd)}
+.lb{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+.tp{font-size:11px;padding:2px 8px;border-radius:6px;font-weight:700}
+.tp-CM{background:#FDEAEA;color:#D32F2F}.tp-PM{background:#E3F2FD;color:#1565C0}.tp-Change{background:#FFF3E0;color:#E67E22}
+.em{text-align:center;padding:60px 20px;color:var(--mu)}
+
+/* PDF Print Styles */
+@media print{
+  body{background:#fff!important}
+  .hd,.tabs,.ac,.nb,.no-print{display:none!important}
+  .ct{max-width:100%;padding:0}
+  .pnl{box-shadow:none;border-radius:0;padding:10px}
+  .pdf-header{display:block!important}
+}
+.pdf-header{display:none}
+
+@media(max-width:600px){.g2,.g3{grid-template-columns:1fr}.tabs{flex-wrap:wrap}.hi{flex-direction:column;align-items:flex-start}.pnl{padding:16px}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.26.9/babel.min.js"></script>
+<script type="text/babel">
+const {useState,useCallback,useRef,useEffect}=React;
+
+// ╔══════════════════════════════════════════════════════════════╗
+// ║  ⚙️ ADMIN CONFIG — ข้าวแก้ตรงนี้ครั้งเดียว                    ║
+// ║  วาง HTTP POST URL จาก Power Automate Flow ที่นี่             ║
+// ╚══════════════════════════════════════════════════════════════╝
+const FLOW_URL = "PASTE_YOUR_POWER_AUTOMATE_URL_HERE";
+// ตัวอย่าง: "https://prod-48.westus.logic.azure.com:443/workflows/abc123..."
+
+const BRANCH='กำแพงเพชร',BC='KP',YS='69';
+const genNo=s=>`${BC}${YS}-IC-${String(s).padStart(4,'0')}`;
+const today=()=>new Date().toISOString().split('T')[0];
+const mkEmpty=s=>({incidentNo:genNo(s),dateFound:today(),maintenanceType:'',assetCode:'',machineName:'',hourMeter:'',equipmentAge:'',objective:'',machineFunction:'',malfunction:'',rootCause:'',impact:'',inspectorName:'',inspectorPosition:'',spareParts:'ไม่มี',quantity:'',preliminaryFix:'',fixDate:'',afterFix:'',price:'',vatOption:'ไม่มี VAT',vatAmount:'',totalPrice:'',newPrice:'',status:'รออนุมัติงบ',contractor:'',prPoNo:'',remark:'',beforePhotos:[],afterPhotos:[]});
+
+function Inp({value,onChange,placeholder,type='text'}){return<input className="ip"type={type}value={value}onChange={e=>onChange(e.target.value)}placeholder={placeholder}/>}
+function Txa({value,onChange,placeholder,rows=3}){return<textarea className="ta"rows={rows}value={value}onChange={e=>onChange(e.target.value)}placeholder={placeholder}/>}
+function Sel({value,onChange,options,placeholder}){return<select className="sl"value={value}onChange={e=>onChange(e.target.value)}>{placeholder&&<option value="">{placeholder}</option>}{options.map(o=>{const v=typeof o==='string'?o:o.value,l=typeof o==='string'?o:o.label;return<option key={v}value={v}>{l}</option>})}</select>}
+function Fld({label,required,hint,children}){return<div className="fl"><label>{label}{required&&<span className="rq">*</span>}</label>{hint&&<div className="ht">{hint}</div>}{children}</div>}
+function Sec({title,accent='var(--pr)',children}){return<div className="sc"><div className="sh"style={{borderBottom:`2.5px solid ${accent}`}}><div className="sb"style={{background:accent}}/><div className="st">{title}</div></div>{children}</div>}
+function Bdg({status}){const c=status==='รออนุมัติงบ'?'bg-p':status==='อนุมัติงบ'?'bg-a':status==='ปิดจบงานแล้ว'?'bg-c':'bg-x';return<span className={`bg ${c}`}>{status}</span>}
+
+function Photos({photos,onAdd,onRemove,label}){
+  const ref=useRef(null);
+  const h=e=>{Array.from(e.target.files).forEach(f=>{const r=new FileReader();r.onload=ev=>onAdd({name:f.name,data:ev.target.result});r.readAsDataURL(f)});e.target.value=''};
+  return<div><div style={{fontSize:13,fontWeight:600,marginBottom:8}}>{label}</div><div className="pa">
+    {photos.map((p,i)=><div key={i}className="pt"><img src={p.data}alt={p.name}/><button className="pr no-print"onClick={()=>onRemove(i)}>×</button></div>)}
+    {photos.length<3&&<label className="pad no-print"onClick={()=>ref.current?.click()}><span>+</span><span>เพิ่มรูป</span></label>}
+  </div><input ref={ref}type="file"accept="image/*"multiple hidden onChange={h}/></div>
+}
+
+// PDF layout matching Excel Print sheet — 2 column format
+function PDFView({form}){
+  const b='1px solid #999';
+  const cellL={border:b,padding:'5px 8px',fontSize:11,verticalAlign:'top'};
+  const cellH={...cellL,fontWeight:700,background:'#f0f0f0',width:'15%',whiteSpace:'nowrap'};
+  const cellV={...cellL,width:'35%',whiteSpace:'pre-wrap'};
+  const priceText=form.price?`ราคา ${Number(form.price).toLocaleString()} บาท (${form.vatOption})${form.totalPrice?' รวม ฿'+Number(form.totalPrice).toLocaleString():''}`:'-';
+
+  return<div id="pdf-content"style={{fontFamily:'Noto Sans Thai, sans-serif',fontSize:11,color:'#222',maxWidth:780,margin:'0 auto'}}>
+    {/* Header */}
+    <table style={{width:'100%',borderCollapse:'collapse',marginBottom:4}}>
+      <tbody>
+        <tr><td style={{fontSize:16,fontWeight:800,textAlign:'center',paddingBottom:4}} colSpan={4}>Incident Report / ใบแจ้งซ่อม / ใบตรวจรับงาน</td></tr>
+        <tr><td colSpan={2} style={{fontSize:11}}>หัวหน้าลาน : คุณสมนึก เปรมบุญ</td><td colSpan={2} style={{fontSize:11,textAlign:'right'}}>สาขา : {BRANCH}</td></tr>
+        <tr><td colSpan={2}></td><td colSpan={2} style={{fontSize:11,textAlign:'right'}}>ขออนุมัติงบซ่อม : ระบบ Signtech</td></tr>
+      </tbody>
+    </table>
+
+    {/* Main 2-column table */}
+    <table style={{width:'100%',borderCollapse:'collapse',border:b}}>
+      <thead><tr>
+        <th style={{...cellH,width:'15%',textAlign:'center'}}>หัวข้อ</th>
+        <th style={{...cellH,width:'35%',textAlign:'center'}} colSpan={2}>รายงานการตรวจพบ</th>
+        <th style={{...cellH,width:'25%',textAlign:'center'}}>การแก้ไขเบื้องต้น</th>
+        <th style={{...cellH,width:'25%',textAlign:'center'}}>หลังตรวจสอบ/แก้ไข</th>
+      </tr></thead>
+      <tbody>
+        {/* Row: วัตถุประสงค์ */}
+        <tr>
+          <td style={cellH}>วัตถุประสงค์/อ้างอิง</td>
+          <td style={cellV} colSpan={2}>{form.objective||'-'}</td>
+          <td style={cellV}>จำนวน {form.quantity||'-'}</td>
+          <td style={cellV}>{priceText}</td>
+        </tr>
+        {/* Row: ชื่อเครื่องจักร */}
+        <tr>
+          <td style={cellH}>ชื่อเครื่องจักร/รหัส:</td>
+          <td style={cellV} colSpan={2}>{form.machineName||'-'}</td>
+          <td style={{...cellV,rowSpan:1}}></td>
+          <td style={{...cellV,rowSpan:2,verticalAlign:'top'}}>{form.afterFix||'-'}</td>
+        </tr>
+        {/* Row: รหัสทรัพย์สิน */}
+        <tr>
+          <td style={cellH}>รหัสทรัพย์สิน</td>
+          <td style={cellV} colSpan={2}>{form.assetCode||'-'}</td>
+          <td style={{...cellV,rowSpan:3,verticalAlign:'top'}}>{form.preliminaryFix||'-'}</td>
+        </tr>
+        {/* Row: Incident No */}
+        <tr>
+          <td style={cellH}>Incident No:</td>
+          <td style={cellV} colSpan={2}>{form.incidentNo}</td>
+          <td style={cellV}></td>
+        </tr>
+        {/* Row: Hour Meter */}
+        <tr>
+          <td style={cellH}>Hour Meter/เลขไมล์</td>
+          <td style={cellV} colSpan={2}>{form.hourMeter||'-'}{form.equipmentAge?`\n${form.equipmentAge}`:''}</td>
+          <td style={cellV}></td>
+        </tr>
+        {/* Row: หน้าที่การทำงาน */}
+        <tr>
+          <td style={cellH}>หน้าที่การทำงาน:</td>
+          <td style={cellV} colSpan={2}>{form.machineFunction||'-'}</td>
+          <td style={cellV}></td>
+          <td style={cellV}></td>
+        </tr>
+        {/* Row: อาการเสีย */}
+        <tr>
+          <td style={cellH}>อาการเสีย:</td>
+          <td style={cellV} colSpan={2}>{form.malfunction||'-'}</td>
+          <td style={cellV}></td>
+          <td style={cellV}></td>
+        </tr>
+        {/* Row: สาเหตุ */}
+        <tr>
+          <td style={cellH}>สาเหตุ:</td>
+          <td style={cellV} colSpan={2}>{form.rootCause||'-'}</td>
+          <td style={cellV}></td>
+          <td style={cellV}></td>
+        </tr>
+        {/* Row: ผลกระทบ */}
+        <tr>
+          <td style={cellH}>ผลกระทบ:</td>
+          <td style={cellV} colSpan={2}>{form.impact||'-'}</td>
+          <td style={cellV}></td>
+          <td style={cellV}></td>
+        </tr>
+        {/* Row: วันเวลาที่พบ */}
+        <tr>
+          <td style={cellH}>วันเวลาที่พบ:</td>
+          <td style={cellV} colSpan={2}>{form.dateFound}</td>
+          <td style={cellV}>{form.fixDate||form.dateFound}</td>
+          <td style={cellV}>{form.fixDate||'-'}</td>
+        </tr>
+        {/* Row: ผู้ตรวจพบ */}
+        <tr>
+          <td style={cellH}>ผู้ตรวจพบ:</td>
+          <td style={cellV}>{form.inspectorName||'-'}</td>
+          <td style={cellV}>{form.inspectorPosition?`( ${form.inspectorPosition} )`:''}</td>
+          <td style={cellV}>{form.inspectorName||'-'}</td>
+          <td style={cellV}>{form.contractor||'-'}</td>
+        </tr>
+        {/* Row: ประเภทซ่อม */}
+        <tr>
+          <td style={cellH}>ประเภทซ่อม</td>
+          <td style={cellV} colSpan={2}>{form.maintenanceType||'-'}</td>
+          <td style={cellV}>{form.maintenanceType||'-'}</td>
+          <td style={cellV}>{form.maintenanceType||'-'}</td>
+        </tr>
+        {/* Row: อะไหล่ */}
+        <tr>
+          <td style={cellH}>รายการเบิก-อะไหล่</td>
+          <td style={cellV} colSpan={2}>{form.spareParts||'ไม่มี'}</td>
+          <td style={cellV}>{form.spareParts||'ไม่มี'}</td>
+          <td style={cellV}>{form.spareParts||'ไม่มี'}</td>
+        </tr>
+        {/* Row: ภาพ */}
+        <tr>
+          <td style={{...cellH,textAlign:'center'}} colSpan={3}>ภาพ : ก่อนแก้ไข</td>
+          <td style={{...cellH,textAlign:'center'}} colSpan={2}>ภาพ : หลังแก้ไข</td>
+        </tr>
+        <tr>
+          <td style={{...cellV,textAlign:'center',minHeight:100}} colSpan={3}>
+            <div style={{display:'flex',gap:8,justifyContent:'center',padding:8,minHeight:80}}>
+              {form.beforePhotos.length>0?form.beforePhotos.map((p,i)=><img key={i}src={p.data}style={{width:110,height:80,objectFit:'cover',border:'1px solid #ccc'}}/>):<span style={{color:'#999'}}>ไม่มีรูป</span>}
+            </div>
+          </td>
+          <td style={{...cellV,textAlign:'center',minHeight:100}} colSpan={2}>
+            <div style={{display:'flex',gap:8,justifyContent:'center',padding:8,minHeight:80}}>
+              {form.afterPhotos.length>0?form.afterPhotos.map((p,i)=><img key={i}src={p.data}style={{width:110,height:80,objectFit:'cover',border:'1px solid #ccc'}}/>):<span style={{color:'#999'}}>ไม่มีรูป</span>}
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    {/* Signatures — 3 levels, 2 columns */}
+    <table style={{width:'100%',borderCollapse:'collapse',marginTop:16,border:b}}>
+      <thead><tr>
+        <th style={{...cellH,textAlign:'center',width:'50%'}}>ดำเนินการแจ้งซ่อม</th>
+        <th style={{...cellH,textAlign:'center',width:'50%'}}>ดำเนินการตรวจรับงาน</th>
+      </tr></thead>
+      <tbody>
+        {/* Level 1 */}
+        <tr>
+          <td style={{...cellV,textAlign:'center',paddingTop:30,paddingBottom:4}}>
+            …........................................<br/>
+            ( {form.inspectorName||'ชื่อผู้แจ้ง'} )<br/>
+            <span style={{fontSize:10,color:'#666'}}>{form.inspectorPosition||'ตำแหน่ง'}</span>
+          </td>
+          <td style={{...cellV,textAlign:'center',paddingTop:30,paddingBottom:4}}>
+            …........................................<br/>
+            ( {form.inspectorName||'ชื่อผู้ตรวจรับ'} )<br/>
+            <span style={{fontSize:10,color:'#666'}}>{form.inspectorPosition||'ตำแหน่ง'}</span>
+          </td>
+        </tr>
+        {/* Level 2 */}
+        <tr>
+          <td style={{...cellV,textAlign:'center',paddingTop:24,paddingBottom:4}}>
+            …........................................<br/>
+            ( คุณสมนึก เปรมบุญ )<br/>
+            <span style={{fontSize:10,color:'#666'}}>หัวหน้าลาน/จุดรับซื้อ</span>
+          </td>
+          <td style={{...cellV,textAlign:'center',paddingTop:24,paddingBottom:4}}>
+            …........................................<br/>
+            ( คุณสมนึก เปรมบุญ )<br/>
+            <span style={{fontSize:10,color:'#666'}}>หัวหน้าลาน/จุดรับซื้อ</span>
+          </td>
+        </tr>
+        {/* Level 3 */}
+        <tr>
+          <td style={{...cellV,textAlign:'center',paddingTop:24,paddingBottom:8}}>
+            …........................................<br/>
+            ( คุณเทพฤทธิ์ ชัยนาม )<br/>
+            <span style={{fontSize:10,color:'#666'}}>เจ้าหน้าที่อาวุโส ซ่อมบำรุงกลาง</span>
+          </td>
+          <td style={{...cellV,textAlign:'center',paddingTop:24,paddingBottom:8}}>
+            …........................................<br/>
+            ( คุณเมธาวี ธรรมรักษ์ )<br/>
+            <span style={{fontSize:10,color:'#666'}}>ผู้ช่วยผู้จัดการซ่อมบำรุงกลาง</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>;
+}
+
+function App(){
+  const[form,setForm]=useState(()=>mkEmpty(parseInt(localStorage.getItem('i_sq')||'1')));
+  const[records,setRecords]=useState(()=>JSON.parse(localStorage.getItem('i_rc')||'[]'));
+  const[seq,setSeq]=useState(()=>parseInt(localStorage.getItem('i_sq')||'1'));
+  const[view,setView]=useState('form');
+  const[tab,setTab]=useState('report');
+  const[editIdx,setEditIdx]=useState(null);
+  const[saving,setSaving]=useState(false);
+  const[msg,setMsg]=useState(null);
+  const[showPdf,setShowPdf]=useState(false);
+
+  useEffect(()=>{localStorage.setItem('i_rc',JSON.stringify(records));localStorage.setItem('i_sq',String(seq))},[records,seq]);
+
+  const set=useCallback(k=>v=>{
+    setForm(p=>{const n={...p,[k]:v};
+      if(k==='price'||k==='vatOption'){const pr=parseFloat(k==='price'?v:p.price)||0;const vt=k==='vatOption'?v:p.vatOption;
+        if(vt==='VAT 7%'){n.vatAmount=(pr*.07).toFixed(2);n.totalPrice=(pr*1.07).toFixed(2)}
+        else if(vt==='VAT 3%'){n.vatAmount=(pr*.03).toFixed(2);n.totalPrice=(pr*1.03).toFixed(2)}
+        else{n.vatAmount='';n.totalPrice=pr?String(pr):''}}return n})
+  },[]);
+
+  const ok=()=>{if(!form.machineName||!form.malfunction||!form.maintenanceType){alert('กรุณากรอก:\n• ชื่อเครื่องจักร\n• อาการเสีย\n• ประเภทซ่อม');return false}return true};
+
+  // === SAVE: บันทึกลง Excel Online + local ===
+  const handleSave=async()=>{
+    if(!ok())return;
+    setSaving(true);setMsg(null);
+
+    // Save to local list
+    if(editIdx!==null){setRecords(r=>r.map((x,i)=>i===editIdx?{...form}:x));setEditIdx(null)}
+    else{setRecords(r=>[...r,{...form}]);setSeq(s=>s+1)}
+
+    // Send to Power Automate (if URL configured)
+    if(FLOW_URL&&!FLOW_URL.includes('PASTE_YOUR')){
+      const pl={};['incidentNo','dateFound','maintenanceType','assetCode','machineName','hourMeter','equipmentAge','objective','machineFunction','malfunction','rootCause','impact','inspectorName','inspectorPosition','spareParts','quantity','preliminaryFix','afterFix','price','vatOption','vatAmount','totalPrice','newPrice','status','contractor','prPoNo','remark'].forEach(k=>pl[k]=form[k]||'');
+      try{
+        const r=await fetch(FLOW_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(pl)});
+        if(r.ok){setMsg({t:'s',x:'✅ บันทึกเรียบร้อย — ข้อมูลถูกส่งลง Excel Online แล้ว'})}
+        else{setMsg({t:'e',x:`⚠️ บันทึกในเครื่องแล้ว แต่ส่ง Excel ไม่สำเร็จ (${r.status})`})}
+      }catch(e){setMsg({t:'e',x:`⚠️ บันทึกในเครื่องแล้ว แต่เชื่อมต่อ Excel ไม่ได้`})}
+    }else{
+      setMsg({t:'s',x:'✅ บันทึกเรียบร้อย'});
+    }
+
+    setSaving(false);
+    setTimeout(()=>{setForm(mkEmpty(seq+1));setTab('report');setView('list');setMsg(null)},2000);
+  };
+
+  // === EXPORT PDF ===
+  const handlePDF=()=>{setShowPdf(true);setTimeout(()=>{window.print();setShowPdf(false)},300)};
+
+  const editRec=i=>{setForm({...records[i]});setEditIdx(i);setTab('report');setView('form')};
+  const newRec=()=>{setForm(mkEmpty(seq+1));setEditIdx(null);setTab('report');setView('form')};
+  const expJSON=()=>{const b=new Blob([JSON.stringify(records,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='incident_reports.json';a.click()};
+
+  // PDF print view
+  if(showPdf)return<div className="ct"style={{padding:20}}><PDFView form={form}/></div>;
+
+  return<div>
+    <div className="hd"><div className="ct">
+      <div className="hi">
+        <div>
+          <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:4}}>
+            <div className="hico">📋</div><h1>ใบแจ้งซ่อม</h1>
+          </div>
+          <div className="hsub">Incident Report — สาขา{BRANCH}</div>
+        </div>
+        <div style={{display:'flex',gap:8}}>
+          <button className={`nb ${view==='form'?'on':''}`}onClick={()=>setView('form')}>+ แจ้งซ่อม</button>
+          <button className={`nb ${view==='list'?'on':''}`}onClick={()=>setView('list')}>📑 รายการ ({records.length})</button>
+        </div>
+      </div>
+      {view==='form'&&<div className="tabs">
+        <button className={`tb ${tab==='report'?'on':''}`}onClick={()=>setTab('report')}>🔍 ตรวจพบ</button>
+        <button className={`tb ${tab==='fix'?'on':''}`}onClick={()=>setTab('fix')}>🔧 แก้ไข</button>
+        <button className={`tb ${tab==='result'?'on':''}`}onClick={()=>setTab('result')}>✅ ตรวจรับ</button>
+      </div>}
+    </div></div>
+
+    <div className="ct">
+    {view==='form'&&<div className="pnl">
+      <div className="ib"><div className="ino">{form.incidentNo||'—'}</div><Bdg status={form.status}/></div>
+      {msg&&<div className={`al ${msg.t==='s'?'al-s':'al-e'}`}>{msg.x}</div>}
+
+      {tab==='report'&&<div>
+        <Sec title="ข้อมูลทั่วไป"><div className="g2">
+          <Fld label="Incident No"required><Inp value={form.incidentNo}onChange={set('incidentNo')}placeholder="KP69-IC-0001"/></Fld>
+          <Fld label="วันเวลาที่พบ"required><Inp type="date"value={form.dateFound}onChange={set('dateFound')}/></Fld>
+          <Fld label="ประเภทซ่อม"required><Sel value={form.maintenanceType}onChange={set('maintenanceType')}placeholder="— เลือก —"options={[{value:'CM',label:'CM — ซ่อมเมื่อเสีย'},{value:'PM',label:'PM — บำรุงรักษาตามรอบ'},{value:'Change',label:'Change — เปลี่ยนอะไหล่'}]}/></Fld>
+          <Fld label="รหัสทรัพย์สิน"hint="Asset Code จาก SAP"><Inp value={form.assetCode}onChange={set('assetCode')}placeholder="เช่น 8200002447"/></Fld>
+        </div></Sec>
+        <Sec title="ข้อมูลเครื่องจักร">
+          <Fld label="ชื่อเครื่องจักร / รหัส"required><Inp value={form.machineName}onChange={set('machineName')}placeholder="เช่น Hand Pallet 2.5 ton"/></Fld>
+          <div className="g2">
+            <Fld label="Hour Meter / เลขไมล์"><Inp value={form.hourMeter}onChange={set('hourMeter')}placeholder="เช่น 347 km"/></Fld>
+            <Fld label="อายุการใช้งาน"><Inp value={form.equipmentAge}onChange={set('equipmentAge')}placeholder="เช่น 8 ปี ซ่อมครั้งที่ 1"/></Fld>
+          </div>
+          <Fld label="วัตถุประสงค์"><Txa value={form.objective}onChange={set('objective')}placeholder='"ขออนุมัติซ่อม..."'rows={2}/></Fld>
+          <Fld label="หน้าที่การทำงาน"><Inp value={form.machineFunction}onChange={set('machineFunction')}placeholder="เช่น ขนย้ายพาเลท"/></Fld>
+        </Sec>
+        <Sec title="อาการและสาเหตุ"accent="var(--or)">
+          <Fld label="อาการเสีย"required hint="ใช้หลัก 5 ประสาทสัมผัส"><Txa value={form.malfunction}onChange={set('malfunction')}placeholder="เช่น ยกของไม่ขึ้น"/></Fld>
+          <Fld label="สาเหตุ"><Txa value={form.rootCause}onChange={set('rootCause')}placeholder="เช่น แกนไฮดรอลิกคดงอ"/></Fld>
+          <Fld label="ผลกระทบ"><Txa value={form.impact}onChange={set('impact')}placeholder="เช่น ใช้งานไม่ได้"/></Fld>
+        </Sec>
+        <Sec title="ผู้ตรวจพบ / อะไหล่"><div className="g2">
+          <Fld label="ผู้ตรวจพบ"><Inp value={form.inspectorName}onChange={set('inspectorName')}placeholder="ชื่อ-นามสกุล"/></Fld>
+          <Fld label="ตำแหน่ง"><Inp value={form.inspectorPosition}onChange={set('inspectorPosition')}placeholder="จนท.อาวุโส"/></Fld>
+        </div><div className="g2">
+          <Fld label="อะไหล่"><Inp value={form.spareParts}onChange={set('spareParts')}/></Fld>
+          <Fld label="จำนวน"><Inp value={form.quantity}onChange={set('quantity')}placeholder="1 งาน"/></Fld>
+        </div></Sec>
+        <Sec title="ภาพก่อนแก้ไข"accent="var(--or)">
+          <Photos label="รูปก่อนแก้ไข (สูงสุด 3)"photos={form.beforePhotos}onAdd={p=>set('beforePhotos')([...form.beforePhotos,p])}onRemove={i=>set('beforePhotos')(form.beforePhotos.filter((_,j)=>j!==i))}/>
+        </Sec>
+      </div>}
+
+      {tab==='fix'&&<Sec title="การแก้ไขเบื้องต้น">
+        <Fld label="วิธีแก้ไขเบื้องต้น"hint="สิ่งที่ทำไปแล้ว"><Txa value={form.preliminaryFix}onChange={set('preliminaryFix')}rows={4}placeholder="เช่น แจ้งหยุดใช้งาน"/></Fld>
+        <Fld label="วันที่แก้ไข"><Inp type="date"value={form.fixDate}onChange={set('fixDate')}/></Fld>
+      </Sec>}
+
+      {tab==='result'&&<div>
+        <Sec title="หลังตรวจสอบ / แก้ไข">
+          <Fld label="รายละเอียดการซ่อม"><Txa value={form.afterFix}onChange={set('afterFix')}rows={4}placeholder="เช่น เปลี่ยนน้ำมันเครื่องเรียบร้อย"/></Fld>
+        </Sec>
+        <Sec title="ค่าใช้จ่าย"><div className="g3">
+          <Fld label="ราคา (บาท)"><Inp type="number"value={form.price}onChange={set('price')}placeholder="0"/></Fld>
+          <Fld label="VAT"><Sel value={form.vatOption}onChange={set('vatOption')}options={['ไม่มี VAT','VAT 7%','VAT 3%']}/></Fld>
+          <Fld label="ราคารวม"><div className="cp">{form.totalPrice?`฿ ${Number(form.totalPrice).toLocaleString()}`:'—'}</div></Fld>
+        </div><div className="g2">
+          <Fld label="ราคาซื้อใหม่"><Inp type="number"value={form.newPrice}onChange={set('newPrice')}placeholder="0"/></Fld>
+          <Fld label="ผู้รับจ้าง"><Inp value={form.contractor}onChange={set('contractor')}placeholder="เช่น ร้านรุ้งเกษตรยนต์"/></Fld>
+        </div><div className="g2">
+          <Fld label="PR / PO No."><Inp value={form.prPoNo}onChange={set('prPoNo')}placeholder="PR 7311020098"/></Fld>
+          <Fld label="สถานะ"><Sel value={form.status}onChange={set('status')}options={['รออนุมัติงบ','อนุมัติงบ','ปิดจบงานแล้ว','ยกเลิก']}/></Fld>
+        </div>
+          <Fld label="หมายเหตุ"><Inp value={form.remark}onChange={set('remark')}placeholder="หมายเหตุ"/></Fld>
+        </Sec>
+        <Sec title="ภาพหลังแก้ไข"accent="var(--ac)">
+          <Photos label="รูปหลังแก้ไข (สูงสุด 3)"photos={form.afterPhotos}onAdd={p=>set('afterPhotos')([...form.afterPhotos,p])}onRemove={i=>set('afterPhotos')(form.afterPhotos.filter((_,j)=>j!==i))}/>
+        </Sec>
+      </div>}
+
+      <div className="ac">
+        <div>{tab!=='report'&&<button className="bt bt-bk"onClick={()=>setTab(tab==='result'?'fix':'report')}>← ย้อนกลับ</button>}</div>
+        <div style={{display:'flex',gap:8}}>
+          {tab!=='result'&&<button className="bt bt-nx"onClick={()=>setTab(tab==='report'?'fix':'result')}>ถัดไป →</button>}
+          {tab==='result'&&<>
+            <button className="bt bt-pdf"onClick={handlePDF}>📄 Export PDF</button>
+            <button className="bt bt-sv"onClick={handleSave}disabled={saving}>{saving?'⏳ กำลังบันทึก...':'💾 บันทึก'}</button>
+          </>}
+        </div>
+      </div>
+    </div>}
+
+    {view==='list'&&<div className="lp">
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:20,flexWrap:'wrap',gap:10}}>
+        <h2 style={{fontSize:18,fontWeight:700,color:'var(--dk)'}}>รายการใบแจ้งซ่อม ({records.length})</h2>
+        <div style={{display:'flex',gap:8}}>
+          <button className="bt bt-nx"onClick={newRec}>+ แจ้งซ่อมใหม่</button>
+          {records.length>0&&<button className="bt bt-bk"onClick={expJSON}>📥 Export JSON</button>}
+        </div>
+      </div>
+      {!records.length?<div className="em"><div style={{fontSize:48,marginBottom:12}}>📋</div><div style={{fontSize:15,fontWeight:500}}>ยังไม่มีรายการ</div><div style={{fontSize:13,marginTop:6}}>กด "+ แจ้งซ่อมใหม่" เพื่อเริ่มต้น</div></div>
+      :records.map((r,i)=><div key={i}className="li"onClick={()=>editRec(i)}>
+        <div>
+          <div className="lb">
+            <span style={{fontSize:14,fontWeight:700,color:'var(--pr)'}}>{r.incidentNo}</span>
+            <span className={`tp tp-${r.maintenanceType}`}>{r.maintenanceType}</span>
+            <Bdg status={r.status}/>
+          </div>
+          <div style={{fontSize:13,fontWeight:500}}>{r.machineName}</div>
+          <div style={{fontSize:11,color:'var(--mu)',marginTop:2}}>{r.dateFound}{r.inspectorName&&` • ${r.inspectorName}`}{r.totalPrice&&` • ฿${Number(r.totalPrice).toLocaleString()}`}</div>
+        </div>
+        <div style={{fontSize:18,color:'var(--bd)'}}>›</div>
+      </div>)}
+    </div>}
+    </div>
+  </div>;
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
